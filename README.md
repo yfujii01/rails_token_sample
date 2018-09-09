@@ -1,24 +1,48 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- ユーザー作成
+```
+curl -X POST \
+ -H 'Content-Type:application/json'\
+ -d '{ "name": "testuser", "pwd": "ddddd" }'\
+ http://0.0.0.0:3000/users
+```
 
-Things you may want to cover:
+- メモ作成
+```
+curl -X POST\
+ -H 'Content-Type:application/json'\
+ -d '{ "title": "HELLO!", "content": "NAIYOwaNAIYO" }'\
+ http://0.0.0.0:3000/memos
+```
 
-* Ruby version
 
-* System dependencies
+rails g controller login login
 
-* Configuration
 
-* Database creation
+- ログイン成功(token返却)
+```
+curl -X POST \
+ -H 'Content-Type:application/json'\
+ -D -\
+ -d '{ "name": "testuser", "pwd": "ddddd" }'\
+ http://0.0.0.0:3000/login/login
+```
 
-* Database initialization
+- ログイン失敗(token返却)
+```
+curl -X POST \
+ -H 'Content-Type:application/json'\
+ -D -\
+ -d '{ "name": "testuser", "pwd": "piyopiyo" }'\
+ http://0.0.0.0:3000/login/login
+```
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+curl -X GET\
+ -H 'Authorization: Token ryCbttjjhL4ZXmKCn1FkGeTA'\
+ -H 'Content-Type:application/json'\
+ -D -\
+ http://0.0.0.0:3000/memos/1
+```
